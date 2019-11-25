@@ -3,9 +3,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const routes = require("./src/routes");
-/**
- * DB
- */
+
 const setupDatabase = require("./src/models");
 
 setupDatabase()
@@ -13,18 +11,13 @@ setupDatabase()
     /**
      * Start the server when DB is ready
      */
-
-    app.set("view engine", "ejs");
-    /**
-     * Middlewares
-     */
+    
+    // Middlewares     
     app.use(express.static("./public"));
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
 
-    /**
-     * Routes
-     */
+    // Routes
     app.use("/", routes);
 
     app.listen(PORT, () => {
