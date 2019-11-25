@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-
+const sequelize = require("../config/db_connection");
 class TodoCategories extends Sequelize.Model {}
 
 TodoCategories.init({
@@ -11,11 +11,9 @@ TodoCategories.init({
   },
   name: Sequelize.STRING(300)
 }, {
-  sequelize:sequelizeCon,
+  sequelize,
   modelName: 'TodoCategories'
 });
 
 // Note: using `force: true` will drop the table if it already exists
-module.exports = TodoCategories.sync({
-  // force: true
- });;
+module.exports = TodoCategories;

@@ -16,7 +16,6 @@ sequelizeCon
   });
 
 module.exports = sequelizeCon;
-global.sequelizeCon = sequelizeCon;
 
 // const mysql      = require('mysql');
 // const connection = mysql.createConnection({
