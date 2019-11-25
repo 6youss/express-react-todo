@@ -10,7 +10,10 @@ Todos.init(
       autoIncrement: true,
       primaryKey: true
     },
-    text: Sequelize.STRING(300),
+    text: {
+      allowNull: false,
+      type: Sequelize.STRING(300)
+    }
     // category: {
     //   type: Sequelize.INTEGER,
     //   references: {

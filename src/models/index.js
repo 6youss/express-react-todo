@@ -1,7 +1,7 @@
 const TodoCategories = require("./TodoCategories");
 const TodoModel = require("./Todos");
 
-module.exports = async function setupDatabase() {
+async function setupDatabase() {
   try {
     require("../config/db_connection");
 
@@ -18,3 +18,5 @@ module.exports = async function setupDatabase() {
     throw e;
   }
 };
+
+module.exports = setupDatabase;

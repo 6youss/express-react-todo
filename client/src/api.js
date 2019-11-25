@@ -2,7 +2,7 @@ const BASE_URL = "http://localhost:8000/api";
 
 export async function addTodo(text) {
   try {
-    const res = await fetch(BASE_URL + "/todo/add", {
+    const res = await fetch(BASE_URL + "/todo", {
       method: "post",
       headers: {
         "Content-Type": "application/json"

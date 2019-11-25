@@ -19,9 +19,10 @@ module.exports = class TodoController {
 
   static async addTodo(req, res) {
     try {
-      await Todos.create({ text: req.body.text }, { fields: ["text"] });
+      const newTodo = await Todos.create({ text: req.body.text }, { fields: ["text"] });
       res.json({
-        message: "success"
+        message: "success",
+        newTodo
       });
     } catch (error) {
       res.status(500).json({
