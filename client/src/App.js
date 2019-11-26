@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { addTodo, getTodos } from "./api";
+import { addTodo, getTodos, editTodo } from "./api";
 
 function App() {
   const [text, setText] = React.useState();
@@ -8,10 +8,9 @@ function App() {
 
   function handleSubmit(event) {
     addTodo(text)
-      .then(({newTodo}) => {
+      .then(({ newTodo }) => {
         console.log(newTodo);
-        todos.push(newTodo);
-        setTodos(todos);
+        setTodos([...todos, newTodo]);
       })
       .catch(err => {
         console.log(err);
@@ -22,6 +21,17 @@ function App() {
 
   function handleChange(event) {
     setText(event.target.value);
+  }
+
+  function handleTodoChange(id, done) {
+    return () => {
+      editTodo(id, { done: !done })
+        .then(({ newTodo }) => {
+          const updatedTodos = todos.map(todo => (todo.id !== newTodo.id ? todo : newTodo));
+          setTodos(updatedTodos);
+        })
+        .catch(err => console.log(err));
+    };
   }
 
   React.useEffect(() => {
@@ -61,10 +71,15 @@ function App() {
 
         <div className="bg-white shadow-md rounded px-8 py-8 mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">Todos</label>
-          {todos.map(({ text }, index) => (
-            <div key={"todo-" + index} className="flex p-6 items-center">
-              <input className="mr-2 leading-tight" type="checkbox" />
-              <span className="text-gray-700 text-sm">{text}</span>
+          {todos.map(({ id, text, done }, index) => (
+            <div key={"todo-" + index} className="relative flex p-6 items-center flash-on-enter hover:bg-blue-100">
+              <input
+                className="mr-2 leading-tight"
+                type="checkbox"
+                onChange={handleTodoChange(id, done)}
+                checked={done}
+              />
+              <span className={"text-gray-700 text-sm" + (done ? " line-through" : "")}>{text}</span>
             </div>
           ))}
         </div>

@@ -9,11 +9,12 @@ const setupDatabase = require("./src/models");
 
 setupDatabase()
   .then(() => {
+    console.log("DB Connected.");
     /**
      * Start the server when DB is ready
      */
-    
-    // Middlewares     
+
+    // Middlewares
     app.use(express.static("./public"));
     app.use(bodyParser.json());
     app.use(cors());

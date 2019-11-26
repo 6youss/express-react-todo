@@ -6,15 +6,6 @@ const sequelizeCon = new Sequelize("todo_node", "root", 'e"e"', {
   logging: false
 });
 
-sequelizeCon
-  .authenticate()
-  .then(() => {
-    console.log('DB Connected.');
-  })
-  .catch(err => {
-    console.error('DB connect error: ', err);
-  });
-
 module.exports = sequelizeCon;
 
 // const mysql      = require('mysql');

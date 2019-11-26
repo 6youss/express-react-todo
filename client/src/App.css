@@ -1,0 +1,13 @@
+.flash-on-enter {
+  border-radius: 10px;
+  animation: flash-on-enter 500ms ease-in;
+}
+
+@keyframes flash-on-enter {
+  from {
+    background-color: white;
+  }
+  to {
+    background-color: #edf2f7;
+  }
+}

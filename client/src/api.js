@@ -25,3 +25,18 @@ export async function getTodos() {
     throw error;
   }
 }
+
+export async function editTodo(id, fields) {
+  try {
+    const res = await fetch(BASE_URL + "/todo/" + id, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(fields)
+    });
+    return await res.json();
+  } catch (error) {
+    throw error;
+  }
+}

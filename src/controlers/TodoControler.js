@@ -4,7 +4,7 @@ module.exports = class TodoController {
   static async getTodos(req, res) {
     try {
       const todos = await Todos.findAll({
-        attributes: ["id", "text"]
+        attributes: ["id", "text", "done"]
       });
 
       res.json({
@@ -21,7 +21,22 @@ module.exports = class TodoController {
     try {
       const newTodo = await Todos.create({ text: req.body.text }, { fields: ["text"] });
       res.json({
-        message: "success",
+        newTodo
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: "error: " + error
+      });
+    }
+  }
+
+  static async editTodo(req, res) {
+    try {
+      const id = req.params.id;
+      // Check if record exists
+      const todo = await Todos.findOne({ where: { id } });
+      const newTodo = await todo.update(req.body);
+      res.json({
         newTodo
       });
     } catch (error) {

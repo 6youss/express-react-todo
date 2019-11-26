@@ -13,6 +13,10 @@ Todos.init(
     text: {
       allowNull: false,
       type: Sequelize.STRING(300)
+    },
+    done: {
+      type: Sequelize.BOOLEAN(),
+      defaultValue: false
     }
     // category: {
     //   type: Sequelize.INTEGER,
