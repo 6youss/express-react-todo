@@ -29,6 +29,7 @@ function App() {
         .then(({ newTodo }) => {
           const updatedTodos = todos.map(todo => (todo.id !== newTodo.id ? todo : newTodo));
           setTodos(updatedTodos);
+          console.log(newTodo);
         })
         .catch(err => console.log(err));
     };
