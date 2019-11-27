@@ -11,17 +11,13 @@ module.exports = function configPassport(app) {
 
   //store user in session
   passport.serializeUser((user, done) => {
-    console.log("serialise: " + user.id);
-
-    done(null, user);
+    done(null, user.id);
   });
 
   //get the user from the session
-  passport.deserializeUser(async (user, done) => {
-    console.log("deserialise: " + user.id);
+  passport.deserializeUser(async (userId, done) => {
     try {
-      // const user = await UserModel.findOne({ where: { id: userId } });
-      console.log(user);
+      const user = await UserModel.findOne({ where: { id: userId } });
       done(null, user);
     } catch (err) {
       done(err, user);
