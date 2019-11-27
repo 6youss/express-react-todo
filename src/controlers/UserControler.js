@@ -12,4 +12,11 @@ module.exports = class UserController {
       });
     }
   }
+
+  static async signup(req, res) {
+    res.status(200).json({
+      message: "signup success",
+      user: req.body
+    });
+  }
 };

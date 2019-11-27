@@ -18,7 +18,8 @@ export async function addTodo(text) {
 export async function getTodos() {
   try {
     const res = await fetch(BASE_URL + "/todo", {
-      method: "get"
+      method: "get",
+      credentials: "include"
     });
     return await res.json();
   } catch (error) {
@@ -41,14 +42,34 @@ export async function editTodo(id, fields) {
   }
 }
 
-export async function login(username, password) {
+export async function signup(username, password) {
   try {
-    const res = await fetch(BASE_URL + "/user/login", {
+    const res = await fetch(BASE_URL + "/signup", {
       method: "post",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ username, password })
+    });
+    if (res.ok) {
+      return await res.json();
+    } else {
+      throw new Error(res.statusText);
+    }
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function login(username, password) {
+  try {
+    const res = await fetch(BASE_URL + "/login", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ username, password }),
+      credentials: "include"
     });
     if (res.ok) {
       return await res.json();

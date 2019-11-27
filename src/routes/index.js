@@ -4,6 +4,6 @@ const todo = require("./todo");
 const user = require("./user");
 
 routes.use("/todo", todo);
-routes.use("/user", user);
+routes.use("/", user);
 
 module.exports = routes;

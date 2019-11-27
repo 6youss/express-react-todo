@@ -2,7 +2,6 @@ const Todos = require("../models/Todos");
 
 module.exports = class TodoController {
   static async getTodos(req, res) {
-    console.log({ user: req });
     try {
       const todos = await Todos.findAll({
         attributes: ["id", "text", "done"]

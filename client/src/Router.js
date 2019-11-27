@@ -1,11 +1,11 @@
 import React from "react";
-import App from "./App";
-import Login from "./Login";
+// import App from "./App";
+import Auth from "./Auth";
 
 function Router() {
   return (
     <div>
-      <Login />
+      <Auth />
       {/* <App /> */}
     </div>
   );
