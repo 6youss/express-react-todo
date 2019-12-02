@@ -1,5 +1,5 @@
 import React from "react";
-import { signup } from "../api";
+import { signup } from "../API";
 
 export default function Signup() {
   const [username, setUsername] = React.useState("admin");

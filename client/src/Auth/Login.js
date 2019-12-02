@@ -1,5 +1,5 @@
 import React from "react";
-import { login, getTodos } from "../api";
+import { login, getTodos } from "../API";
 
 export default function Login() {
   const [username, setUsername] = React.useState("admin");
@@ -8,8 +8,8 @@ export default function Login() {
   function handleSubmit() {
     login(username, password)
       .then(async res => {
+        localStorage.setItem("accessToken", res.accessToken);
         console.log(res);
-
         const todos = await getTodos();
         console.log(todos);
       })

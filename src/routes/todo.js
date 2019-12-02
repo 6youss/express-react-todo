@@ -1,10 +1,8 @@
 const { Router } = require("express");
 const router = Router();
-
 const TodoControler = require("../controlers/TodoControler");
-const checkAuth = require("../middlewares/checkAuth");
-
-router.get("/", checkAuth, TodoControler.getTodos);
+const passport = require("passport");
+router.get("/", passport.authenticate("jwt", { session: false }), TodoControler.getTodos);
 router.post("/", TodoControler.addTodo);
 router.put("/:id", TodoControler.editTodo);
 

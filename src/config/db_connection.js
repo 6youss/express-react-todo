@@ -1,21 +1,9 @@
 const Sequelize = require("sequelize");
 
-const sequelizeCon = new Sequelize("todo_node", "root", 'e"e"', {
-  host: "localhost",
+const sequelizeCon = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
+  host: process.env.DB_HOST,
   dialect: "mysql",
   logging: false
 });
 
 module.exports = sequelizeCon;
-
-// const mysql      = require('mysql');
-// const connection = mysql.createConnection({
-//   host     : 'localhost',
-//   user     : 'root',
-//   password : 'e"e"',
-//   database : 'todo_node'
-// });
-
-// connection.connect();
-
-// module.exports = connection;

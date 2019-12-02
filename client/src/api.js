@@ -1,4 +1,5 @@
 const BASE_URL = "http://localhost:8000/api";
+const BASE_AUTH_URL = "http://localhost:8001/api";
 
 export async function addTodo(text) {
   try {
@@ -16,12 +17,20 @@ export async function addTodo(text) {
 }
 
 export async function getTodos() {
+  const accessToken = localStorage.getItem("accessToken");
   try {
     const res = await fetch(BASE_URL + "/todo", {
       method: "get",
-      credentials: "include"
+      headers: {
+        Authorization: "Bearer " + accessToken
+      }
     });
-    return await res.json();
+    if (res.ok) {
+      const data = await res.json();
+      return data;
+    } else {
+      throw await res.text();
+    }
   } catch (error) {
     throw error;
   }
@@ -44,7 +53,7 @@ export async function editTodo(id, fields) {
 
 export async function signup(username, password) {
   try {
-    const res = await fetch(BASE_URL + "/signup", {
+    const res = await fetch(BASE_AUTH_URL + "/signup", {
       method: "post",
       headers: {
         "Content-Type": "application/json"
@@ -63,18 +72,18 @@ export async function signup(username, password) {
 
 export async function login(username, password) {
   try {
-    const res = await fetch(BASE_URL + "/login", {
+    const res = await fetch(BASE_AUTH_URL + "/login", {
       method: "post",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ username, password }),
-      credentials: "include"
+      body: JSON.stringify({ username, password })
     });
+    const data = await res.json();
     if (res.ok) {
-      return await res.json();
+      return data;
     } else {
-      throw new Error(res.statusText);
+      throw new Error(JSON.stringify(data));
     }
   } catch (error) {
     throw error;

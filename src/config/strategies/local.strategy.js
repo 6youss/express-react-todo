@@ -8,8 +8,14 @@ module.exports = new Strategy(
     passwordField: "password"
   },
   async (username, password, done) => {
-    const user = await UserModel.findOne({ where: { username } });
-    if (user && user.password === password) done(null, user);
-    else done(null, false, user);
+    try {
+      const user = await UserModel.findOne({ where: { username } });
+      if (user && user.password === password) {
+        done(null, { id: user.id, username: user.username }, { message: "Logged In Successfully" });
+      } else done(null, false, { message: "Incorrect email or password." });
+    } catch (error) {
+      console.log(error);
+      done(error);
+    }
   }
 );
