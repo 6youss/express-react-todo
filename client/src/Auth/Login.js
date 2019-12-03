@@ -8,7 +8,6 @@ export default function Login() {
   function handleSubmit() {
     login(username, password)
       .then(async res => {
-        localStorage.setItem("accessToken", res.accessToken);
         console.log(res);
         const todos = await getTodos();
         console.log(todos);
